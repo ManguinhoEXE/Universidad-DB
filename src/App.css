@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 90vh;
+    width: 100vw;
+}
+
+/* NavB */
+
+.navText {
+    font-weight: bold;
+    font-Family: "PT Sans", sans-serif;
+}
+
+.navb{
+    height: 10vh;
+    box-shadow: 20px 5px 20px #00000033;
+}
+
+.seccions {
+    margin-right: 5vh;
+    display: inline-block;
+}
+
+.seccion {
+    color: #021d1d;
+    margin: 2vh;
+    text-decoration: none;
+}
+
+
