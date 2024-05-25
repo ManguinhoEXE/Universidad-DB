@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 import React from "react"
-import { auth} from '../firebase'
 import { useNavigate } from 'react-router-dom'
+import { auth, db } from "../firebase"; 
 
 
 const SignIn = () => {
@@ -11,40 +11,45 @@ const SignIn = () => {
     const [error, setError] = React.useState(null)
     const navigate = useNavigate()
 
-    const guardarDatos = (e) => {
+    const guardarDatos = async (e) => {
         e.preventDefault()
         if (!email) return setError("Ingrese su Email")
         if (!pass) return setError("Ingrese su Password")
         if (pass.length < 6) return setError("Password mínimo de 6 caracteres")
 
         setError(null)
-        if (login()) {
-            login()
-        }
-    }
 
-    const login = React.useCallback(async () => {
         try {
-            const res = await auth.signInWithEmailAndPassword(email, pass)
+            const res = await auth.signInWithEmailAndPassword(email, pass);
             console.log(res.user);
-            setEmail('')
-            setPass('')
-            setError(null)
-            navigate('/Admin')
+            setEmail("");
+            setPass("");
+
+            // Fetch user role from Firestore
+            const userDoc = await db.collection("usuarios").doc(res.user.email).get();
+            if (userDoc.exists) {
+                const userData = userDoc.data();
+                const userRole = userData.role;
+
+                // Redirect based on user role
+                navigate(userRole === "admin" ? "/Admin" : "/"); // Home for non-admins
+            } else {
+                console.error("User document not found");
+                setError("Error al iniciar sesión"); // Handle missing user document
+            }
         } catch (error) {
-            if (error.code === 'auth/invalid-email') {
-                setError('Email no Válido')
+            console.error(error);
+            if (error.code === "auth/invalid-email") {
+                setError("Email no Válido");
+            } else if (error.code === "auth/user-not-found") {
+                setError("Email no Registrado");
+            } else if (error.code === "auth/wrong-password") {
+                setError("Password no coincide");
+            } else {
+                setError("Error al iniciar sesión"); // Handle generic errors
             }
-            if (error.code === 'auth/user-not-found') {
-                setError('Email no Registrado')
-            }
-            if (error.code === 'auth/wrong-password') {
-                setError('Password no coincide')
-            }
-
-
         }
-    }, [email, pass, navigate])
+        }
 
 
     return (
@@ -58,14 +63,14 @@ const SignIn = () => {
                         <h2 className="text-center">iniciar sesión</h2>
                         <div className="mb-2 col-5 mx-auto">
                             <label className="">Email</label>
-                            <input type="text" className="form-control" onChange={e => setEmail(e.target.value)}/>
+                            <input type="text" className="form-control" onChange={e => setEmail(e.target.value)} />
                         </div>
                         <div className="mb-2 col-5 mx-auto">
                             <label className="">Contraseña</label>
                             <input type="password" className="form-control" onChange={e => setPass(e.target.value)} />
                         </div>
                         <div className="mb-2 col-2 mx-auto">
-                            <button className="btn btn-danger mx-4" type="button" onClick={login}>Registrar</button>
+                            <button className="btn btn-danger mx-4" type="button" onClick={guardarDatos}>Registrar</button>
                         </div>
                     </form>
                 </div>

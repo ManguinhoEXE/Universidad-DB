@@ -2,6 +2,7 @@ import { Fragment } from "react"
 import { Link } from "react-router-dom"
 import { auth, db } from '../firebase'
 import React from "react"
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -11,7 +12,7 @@ const LogIn = () => {
     const [email, setEmail] = React.useState('')
     const [pass, setPass] = React.useState('')
     const [error, setError] = React.useState(null)
-
+    const navigate = useNavigate()
 
     const guardarDatos = (e) => {
         e.preventDefault()
@@ -30,12 +31,14 @@ const LogIn = () => {
             const res = await auth.createUserWithEmailAndPassword(email, pass)
             await db.collection('usuarios').doc(res.user.email).set({
                 email: res.user.email,
-                id: res.user.uid
+                id: res.user.uid,
+                role: 'user'
             })
             console.log(res.user);
             setEmail('')
             setPass('')
             setError(null)
+            navigate('/')
         } catch (error) {
             console.log(error.code);
             if (error.code === 'auth/invalid-email') {
@@ -46,7 +49,7 @@ const LogIn = () => {
             }
 
         }
-    }, [email, pass])
+    }, [email, pass, navigate])
 
     return (
         <Fragment>
