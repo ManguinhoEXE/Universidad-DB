@@ -38,7 +38,7 @@
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
                             <Link style={{ color: "#ebb24d" }} to="/" className='seccion navText'>Inico</Link>
-                            <Link style={{ color: "#ebb24d" }} to="/Seccion#2" className='seccion navText '>Formularios</Link>
+                            <Link style={{ color: "#ebb24d" }} to="/Rooms" className='seccion navText '>Salas</Link>
                             {
                                 firebaseUser && userRole === 'admin' ? (<Link style={{ color: "#ebb24d" }} to="/Admin" className='seccion navText'>Admin</Link>) : null
                             }

@@ -70,7 +70,7 @@ const SignIn = () => {
                             <input type="password" className="form-control" onChange={e => setPass(e.target.value)} />
                         </div>
                         <div className="mb-2 col-2 mx-auto">
-                            <button className="btn btn-danger mx-4" type="button" onClick={guardarDatos}>Registrar</button>
+                            <button className="btn btn-danger mx-4 " type="button" onClick={guardarDatos}>Registrar</button>
                         </div>
                     </form>
                 </div>
