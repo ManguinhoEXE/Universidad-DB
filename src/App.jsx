@@ -32,7 +32,7 @@ function App() {
         <Route path='LogIn' element={<LogIn />} />
         <Route path='SignIn' element={<SignIn />} />
         <Route path='Admin' element={<Admin />} />
-        <Route path='Rooms' element={<Rooms />} />
+        <Route path='Rooms' element={<Rooms user={firebaseUser} />} />
       </Routes>
     </Router>
   ):
