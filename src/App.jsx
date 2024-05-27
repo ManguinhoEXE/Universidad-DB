@@ -12,6 +12,8 @@ import { auth } from './firebase';
 import { useEffect, useState } from 'react'
 import NavB from './Components/NavB';
 import Rooms from './Components/Rooms';
+import Reservas from './Components/Reservas'
+
 
 function App() {
   const [firebaseUser, setFirebaseUser] = useState(false)
@@ -24,19 +26,21 @@ function App() {
       }
     })
   })
-  return firebaseUser!==false ? (
+  return firebaseUser !== false ? (
     <Router>
-      <NavB firebaseUser={firebaseUser}/>
+      <NavB firebaseUser={firebaseUser} />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='LogIn' element={<LogIn />} />
         <Route path='SignIn' element={<SignIn />} />
         <Route path='Admin' element={<Admin />} />
         <Route path='Rooms' element={<Rooms user={firebaseUser} />} />
+        <Route path='Reservas' element={<Reservas user={firebaseUser} />} />
+
       </Routes>
     </Router>
-  ):
-  (<p>Loading...</p>)
+  ) :
+    (<p>Loading...</p>)
 }
 
 export default App
