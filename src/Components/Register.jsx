@@ -15,19 +15,19 @@ const Register = ({ user }) => {
     const [error, setError] = useState(null)
     const [id, setId] = useState('')
 
+    const getSalas = async () => {
+        db.collection("salas").onSnapshot((snapshot) =>{
+            const salas = [];
+            snapshot.forEach((sala)=>{
+                salas.push({...sala.data(), id:sala.id})
+            });
+            setLista(salas);
+        });
+    };
 
-    useEffect(() => {
-        const obtenerDatos = async () => {
-            try {
-                const data = await db.collection("salas").where("creado por", "==", user.email).get(); // Filter by user email (optional)
-                const arrayData = data.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-                setLista(arrayData);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        obtenerDatos();
-    }, [user.email]);  // Dependency array to fetch data only when user changes
+
+    useEffect(() => {getSalas();}, []);
+
 
     const guardarDatos = async (e) => {
         e.preventDefault();
