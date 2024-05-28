@@ -1,5 +1,5 @@
-import { Nav, Navbar, Container } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Nav, Navbar, Offcanvas } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 import { useEffect, useState } from 'react';
 import { db } from '../firebase';
@@ -12,7 +12,6 @@ const NavB = ({ firebaseUser }) => {
 
     useEffect(() => {
         if (firebaseUser) {
-            // Get the user's role claim
             db.collection('usuarios').doc(firebaseUser.email).get().then((doc) => {
                 if (doc.exists) {
                     const userData = doc.data();
@@ -29,37 +28,35 @@ const NavB = ({ firebaseUser }) => {
             })
     }
 
-
     return (
         <Navbar expand="lg" className="bg-body Ligth navb navbar-gradient navb">
-            <Container fluidyyy className='container-nav-item'>
+            <div className='container container-nav-item'>
                 <Navbar.Brand style={{ color: "#ffff" }} className='navText' href="#home">Centro de deporte</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto">
-                        <Link style={{ color: "#ffff" }} to="/" className='seccion navText'>Inico</Link>
-                        <Link style={{ color: "#ffff" }} to="/Rooms" className='seccion navText '>Salas</Link>
-                        {
-                            firebaseUser !== null ? (<Link style={{ color: "#ffff" }} to="/Reservas" className='seccion navText'>Tus Reservas</Link>) : null
-                        }
-                        {
-                            firebaseUser && userRole === 'admin' ? (<Link style={{ color: "#ffff" }} to="/Admin" className='seccion navText'>Admin</Link>) : null
-                        }
-                        {
-                            firebaseUser == null ? (<Link style={{ color: "#ffff" }} to="/LogIn" className='seccion navText'>Log In</Link>) : null
-                        }
-
-
-                        {
-                            firebaseUser !== null ? (
-                                <button style={{ color: "##ffff", backgroundColor: "##ffff", fontWeight: "bold", fontFamily: "PT Sans, sans-serif" }} className='btn text-white'
-                                    onClick={() => cerrarSesion()}
-                                >Cerrar sesión</button>
-                            ) : <Link style={{ color: "##ffff" }} to="/LogIn" className='seccion navText'></Link>
-                        }
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
+                <Navbar.Offcanvas id="basic-navbar-nav" className="bg-side-navbar custom-offcanvas" aria-labelledby="offcanvasNavbar-expand-lg" placement="end">
+                    <Offcanvas.Header closeButton></Offcanvas.Header>
+                    <Offcanvas.Body>
+                        <Nav className="justify-content-end flex-grow-1 pe-3">
+                            <Nav.Link className='seccion navText' href='/'>Inicio</Nav.Link>
+                            <Nav.Link className='seccion navText' href='/Rooms'>Salas</Nav.Link>
+                            {firebaseUser !== null && (
+                                <Nav.Link className='seccion navText' href='/Reservas'>Tus Reservas</Nav.Link>
+                            )}
+                            {firebaseUser && userRole === 'admin' && (
+                                <Nav.Link className='seccion navText' href='/Admin'>Admin</Nav.Link>
+                            )}
+                            {firebaseUser == null && (
+                                <Nav.Link className='seccion navText' href='/LogIn'>Log In</Nav.Link>
+                            )}
+                            {firebaseUser !== null && (
+                                <button className="btn btn-cerrar-sesion text-start" onClick={() => cerrarSesion()}>
+                                    Cerrar sesión
+                                </button>
+                            )}
+                        </Nav>
+                    </Offcanvas.Body>
+                </Navbar.Offcanvas>
+            </div>
         </Navbar>
     )
 }

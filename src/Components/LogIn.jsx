@@ -57,9 +57,9 @@ const LogIn = () => {
                 {
                     error && (<div className='alert alert-danger mt-2 col-4'>{error}</div>)
                 }
-                <div className=" container-login justify-content-center bg bg-light p-5 rounded-5 shadow-lg">
+                <div className=" container-login justify-content-center bg bg-light rounded-5 shadow-lg">
                     <form className="form-login" onSubmit={guardarDatos}>
-                        <h2 className="text-center">Registrarse</h2>
+                        <h2 className="text-center mb-4">Registrarse</h2>
                         <div className="mb-2 col-10 mx-auto">
                             <label>Email</label>
                             <input type="email" className="form-control" onChange={e => setEmail(e.target.value)} />

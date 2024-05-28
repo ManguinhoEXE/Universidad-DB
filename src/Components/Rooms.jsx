@@ -77,7 +77,7 @@ const Rooms = ({ user }) => {
                     <div className={`row ${isSingleCard ? 'row-cols-1' : 'row-cols-1 row-cols-md-2'} g-4`}>
                         {filteredSalas.map((sala) => (
                             <div className={`col ${isSingleCard ? 'single-card' : ''}`} key={sala.id}>
-                                <div style={{ minWidth: "40vw" }} className="card justify-content-center bg-light rounded-5 p-3 shadow-lg border-0">
+                                <div style={{ minWidth: "40vw"}} className="card justify-content-center bg-light rounded-5 p-3 shadow-lg border-0">
                                     <div className="card-body">
                                         <div className="d-flex row">
                                             <h6 className="card-subtitle mb-2 text-body-secondary text-end">

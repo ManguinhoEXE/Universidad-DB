@@ -12,7 +12,7 @@ main {
     width: 100%;
 }
 
-.card-container{
+.card-container {
     margin-inline: 10%;
     padding-bottom: 5vh;
 }
@@ -23,15 +23,32 @@ main {
     background: linear-gradient(to bottom, #fff64e, #fbe628, #ff9900);
 }
 
-.navText {
+
+.navText, .btn-cerrar-sesion{
+    font-size: 20px !important;
     font-weight: bold;
     font-Family: "PT Sans", sans-serif;
+    color: #ffff !important;
+    font-weight: bold !important;
 }
 
 .navb {
     height: 10vh;
     box-shadow: 20px 5px 20px #00000033;
 }
+
+.custom-offcanvas {
+    max-width: fit-content !important;
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
 
 .seccions {
     margin-right: 5vh;
@@ -46,18 +63,27 @@ main {
 
 .hero-div {
     margin-top: 5vh;
-    padding-inline: 30px;
+    padding-inline: 2%;
     border-radius: 10px;
     box-shadow: 20px 5px 20px #00000033;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    max-width: 79vw;
+    margin-inline: auto;
 }
 
 .hero {
     font-family: 'Bebas Neue', sans-serif;
+    text-align: center;
     margin: 0;
     font-size: 48px;
     color: #ffff;
     line-height: 1.6;
+    width: fit;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .content-container {
@@ -93,7 +119,7 @@ main {
 }
 
 .info-section ul {
-    list-style-type: none; 
+    list-style-type: none;
     padding: 0;
     margin: 0;
     display: grid;
@@ -118,7 +144,7 @@ main {
 .carousel-image-container {
     border-radius: 10px;
     position: relative;
-    padding-bottom: 52vh; 
+    padding-bottom: 52vh;
     overflow: hidden;
 }
 
@@ -133,7 +159,7 @@ main {
 
 /* Footer */
 
-.footer-gradient{
+.footer-gradient {
     background: linear-gradient(to bottom, #00c6ff, #0072ff);
 }
 
@@ -169,29 +195,75 @@ main {
 }
 
 /* Login */
-.login{
+.login {
     align-content: center;
     justify-content: center;
+    font-size: 18px;
 }
 
-.container-login{
-    width: 40vw;
+.container-login {
+    width: 50%;
+    height: 100%;
+    padding-block: 3% ;
 }
 
-.form-login > div> input{
+.form-login>div>input {
     border-style: solid;
     border-color: #bdd7fa;
     border-width: 3px;
 }
 
 @media (max-width:1357px) {
-    html{
+    html {
         font-size: 14px
     }
 }
 
-@media (max-width:1040px){
+@media (max-width:1040px) {
+    html {
+        font-size: 11px;
+    }
+}
+
+@media (max-width:991px) {
+    .bg-side-navbar {
+        background: linear-gradient(to bottom, #fbe628, #ff9900) !important;
+    }
+}
+
+@media (max-width:850px) {
     html{
-        font-size: 12px;
+        font-size: 15px;
+    }
+
+    .content-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .info-section,
+    .carousel-section {
+        width: 100%;
+    }
+    
+    .container-login{
+        width: 70%;
+        padding-inline: 2%;
+    }
+
+    .hero{
+        font-size: 36px;
+    }
+
+
+}
+
+@media (max-width:550px) {
+    .custom-offcanvas {
+        max-width: 50vw !important;
+    }
+    .hero{
+        font-size: 30px;
     }
 }

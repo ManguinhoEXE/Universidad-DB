@@ -6,7 +6,7 @@ const Home = () => {
         <Fragment>
             <main>
                 <div className="hero-div navbar-gradient">
-                    <h1 className="hero">Bienvendio a el Centro de Deporte</h1>
+                    <h1 className="hero">Bienvenido a el Centro de Deporte</h1>
                 </div>
                 <div className="content-container">
                     <div className="info-section">
