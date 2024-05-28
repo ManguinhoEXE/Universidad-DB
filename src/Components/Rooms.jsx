@@ -61,7 +61,7 @@ const Rooms = ({ user }) => {
 
     return (
         <Fragment>
-            <main>
+            <main className="rooms">
                 <div className="text-center mb-5 mt-5">
                     <h1>Salas</h1>
                 </div>

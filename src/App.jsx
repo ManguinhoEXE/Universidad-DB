@@ -12,6 +12,7 @@ import { auth } from './firebase';
 import { useEffect, useState } from 'react'
 import NavB from './Components/NavB';
 import Rooms from './Components/Rooms';
+import Footer from './Components/Footer';
 
 function App() {
   const [firebaseUser, setFirebaseUser] = useState(false)
@@ -34,6 +35,7 @@ function App() {
         <Route path='Admin' element={<Admin />} />
         <Route path='Rooms' element={<Rooms user={firebaseUser} />} />
       </Routes>
+      <Footer></Footer>
     </Router>
   ):
   (<p>Loading...</p>)

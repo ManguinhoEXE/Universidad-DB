@@ -1,22 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-main{
+main {
+    background: url(./assets/background.webp) no-repeat center/cover;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: column;
-    min-height: 90vh;
+    min-height: 76vh;
     width: 100vw;
 }
 
 /* NavB */
+
+.navbar-gradient {
+    background: linear-gradient(to bottom, #fff64e, #fbe628, #ff9900);
+}
 
 .navText {
     font-weight: bold;
     font-Family: "PT Sans", sans-serif;
 }
 
-.navb{
+.navb {
     height: 10vh;
     box-shadow: 20px 5px 20px #00000033;
 }
@@ -32,4 +37,145 @@ main{
     text-decoration: none;
 }
 
+.hero-div {
+    margin-top: 5vh;
+    padding-inline: 30px;
+    border-radius: 10px;
+    box-shadow: 20px 5px 20px #00000033;
+    display: flex;
+}
 
+.hero {
+    font-family: 'Bebas Neue', sans-serif;
+    margin: 0;
+    font-size: 48px;
+    color: #ffff;
+    line-height: 1.6;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-around;
+    width: 79vw;
+    margin: 20px 0;
+}
+
+/* Info-section */
+.info-section {
+    width: 45%;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    max-height: 52vh;
+    border-radius: 10px;
+    box-shadow: 20px 5px 20px #00000033;
+}
+
+.info-section h2 {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.info-section p {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.info-section h3 {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.info-section ul {
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 2px;
+}
+
+.info-section ul li {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Carousel */
+.carousel-section {
+    width: 35vw;
+    max-height: 52vh;
+    box-shadow: 20px 5px 20px #00000003;
+}
+
+.carousel-image-container {
+    border-radius: 10px;
+    position: relative;
+    padding-bottom: 52vh; 
+    overflow: hidden;
+}
+
+.carousel-image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Footer */
+
+.footer {
+    height: 14vh;
+    background: linear-gradient(to bottom, #00c6ff, #0072ff);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer-container {
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.quick-links {
+    margin-bottom: 10px;
+}
+
+.university-info {
+    margin-bottom: 0;
+}
+
+.footer-link {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    font-weight: bold;
+}
+
+/* Login */
+.login{
+    align-content: center;
+    justify-content: center;
+}
+
+.container-login{
+    width: 40vw;
+}
+
+.form-login > div> input{
+    border-style: solid;
+    border-color: #bdd7fa;
+    border-width: 3px;
+}
