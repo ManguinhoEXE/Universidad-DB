@@ -46,7 +46,7 @@ const NavB = ({ firebaseUser }) => {
                             firebaseUser && userRole === 'admin' ? (<Link style={{ color: "#ffff" }} to="/Admin" className='seccion navText'>Admin</Link>) : null
                         }
                         {
-                            firebaseUser == null ? (<Link style={{ color: "#ffff" }} to="/LogIn" className='seccion navText'>Log In</Link>) : null
+                            firebaseUser == null ? (<Link style={{ color: "#ffff" }} to="/SignIn" className='seccion navText'>Log In</Link>) : null
                         }
 
 

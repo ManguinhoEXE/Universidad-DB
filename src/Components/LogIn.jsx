@@ -67,7 +67,6 @@ const LogIn = () => {
                         <div className="mb-2 col-10 mx-auto">
                             <label>Contraseña</label>
                             <input type="password" className="form-control" onChange={e => setPass(e.target.value)} />
-                            <Link to="/SignIn" className='link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover'>Ya esta Registrado?</Link>
                         </div>
                         <div className="d-flex justify-content-center mb-2">
                             <button className="btn btn-danger mx-4" type="button" onClick={registrar}>Registrar</button>
