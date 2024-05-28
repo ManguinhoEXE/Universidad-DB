@@ -47,17 +47,19 @@ const Reservas = ({ user }) => {
         return <div>Error fetching reservations: {error}</div>;
     }
 
+    const isSingleCard = listaReservas.length === 1;
+
     return (
         <Fragment>
             <main>
                 <div className="hero-div footer-gradient d-flex justify-content-center mb-5 mt-5 col-5">
                     <h1 className="hero">Tus Reservas</h1>
                 </div>
-                <div className="container">
-                    <div className="row row-cols-2">
+                <div className="card-container">
+                    <div className={`row ${isSingleCard ? 'row-cols-1' : 'row-cols-1 row-cols-md-2'} g-4`}>
                         {listaReservas.map((sala) => (
-                            <div className="col" key={sala.id}>
-                                <div className="card justify-content-center bg-light rounded-5 p-3 shadow-lg border-0 mt-5">
+                            <div className={`col ${isSingleCard ? 'single-card' : ''}`} key={sala.id}>
+                                <div style={{ minWidth: "40vw" }} className="card justify-content-center bg-light rounded-5 p-3 shadow-lg border-0">
                                     <div className="card-body">
                                         <div className="d-flex row">
                                             <h6 className="card-subtitle mb-2 text-body-secondary text-end">
