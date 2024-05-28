@@ -67,17 +67,17 @@ const Rooms = ({ user }) => {
     return (
         <Fragment>
             <main className="rooms">
-                <div className="text-center mb-5 mt-5">
-                    <h1>Salas</h1>
+                <div className="hero-div footer-gradient d-flex justify-content-center mb-5 mt-5 col-5">
+                    <h1 className="hero">Salas</h1>
                 </div>
-                <div className="container">
+                <div className="card-container">
                     <div className="row row-cols-2">
                         <div className="col-7 mx-auto">
                         <input className="form-control text-center" value={filterText} onChange={handleFilterChange} />
                         </div>
                         {filteredSalas.map((sala) => (
                             <div className="col" key={sala.id}>
-                                <div className="card justify-content-center bg-light rounded-5 p-3 shadow-lg border-0 mt-5">
+                                <div style={{minWidth:"40vw"}} className="card justify-content-center bg-light rounded-5 p-3 shadow-lg border-0 mt-5">
                                     <div className="card-body">
                                         <div className="d-flex row">
                                             <h6 className="card-subtitle mb-2 text-body-secondary text-end">

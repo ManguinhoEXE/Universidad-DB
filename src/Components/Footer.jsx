@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer footer-gradient">
       <div className="footer-container">
         <p className="quick-links">
           Acceso rapido a: 

@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+
+
 main {
     background: url(./assets/background.webp) no-repeat center/cover;
     display: flex;
@@ -7,7 +9,12 @@ main {
     align-items: center;
     flex-direction: column;
     min-height: 76vh;
-    width: 100vw;
+    width: 100%;
+}
+
+.card-container{
+    margin-inline: 10%;
+    padding-bottom: 5vh;
 }
 
 /* NavB */
@@ -72,24 +79,17 @@ main {
 
 .info-section h2 {
     font-family: 'PT Sans', sans-serif;
-    font-size: 24px;
+    font-size: 1.5rem;
     color: #333;
     margin-bottom: 10px;
 }
 
 .info-section p {
     font-family: 'PT Sans', sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
     color: #333;
     line-height: 1.6;
     margin-bottom: 20px;
-}
-
-.info-section h3 {
-    font-family: 'PT Sans', sans-serif;
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 10px;
 }
 
 .info-section ul {
@@ -133,10 +133,14 @@ main {
 
 /* Footer */
 
+.footer-gradient{
+    background: linear-gradient(to bottom, #00c6ff, #0072ff);
+}
+
 .footer {
     height: 14vh;
-    background: linear-gradient(to bottom, #00c6ff, #0072ff);
     color: #fff;
+    font-size: 16px;
     text-align: center;
     padding: 20px 0;
 }
@@ -178,4 +182,16 @@ main {
     border-style: solid;
     border-color: #bdd7fa;
     border-width: 3px;
+}
+
+@media (max-width:1357px) {
+    html{
+        font-size: 14px
+    }
+}
+
+@media (max-width:1040px){
+    html{
+        font-size: 12px;
+    }
 }

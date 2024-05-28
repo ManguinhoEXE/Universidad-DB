@@ -50,8 +50,8 @@ const Reservas = ({ user }) => {
     return (
         <Fragment>
             <main>
-                <div className="text-center mb-5 mt-5">
-                    <h1>Tus Reservas</h1>
+                <div className="hero-div footer-gradient d-flex justify-content-center mb-5 mt-5 col-5">
+                    <h1 className="hero">Tus Reservas</h1>
                 </div>
                 <div className="container">
                     <div className="row row-cols-2">

@@ -53,23 +53,23 @@ const LogIn = () => {
 
     return (
         <Fragment>
-            <main className="container-fluid p-5 justify-content-center col-6">
+            <main className="login">
                 {
                     error && (<div className='alert alert-danger mt-2 col-4'>{error}</div>)
                 }
-                <div className=" container justify-content-center bg bg-light p-5 rounded-5 shadow-lg">
-                    <form onSubmit={guardarDatos}>
+                <div className=" container-login justify-content-center bg bg-light p-5 rounded-5 shadow-lg">
+                    <form className="form-login" onSubmit={guardarDatos}>
                         <h2 className="text-center">Registrarse</h2>
-                        <div className="mb-2 col-5 mx-auto">
+                        <div className="mb-2 col-10 mx-auto">
                             <label>Email</label>
                             <input type="email" className="form-control" onChange={e => setEmail(e.target.value)} />
                         </div>
-                        <div className="mb-2 col-5 mx-auto">
+                        <div className="mb-2 col-10 mx-auto">
                             <label>Contraseña</label>
                             <input type="password" className="form-control" onChange={e => setPass(e.target.value)} />
                             <Link to="/SignIn" className='link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover'>Ya esta Registrado?</Link>
                         </div>
-                        <div className="mb-2 col-2 mx-auto">
+                        <div className="d-flex justify-content-center mb-2">
                             <button className="btn btn-danger mx-4" type="button" onClick={registrar}>Registrar</button>
                         </div>
                     </form>
