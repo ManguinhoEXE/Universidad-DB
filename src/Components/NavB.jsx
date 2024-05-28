@@ -46,7 +46,7 @@ const NavB = ({ firebaseUser }) => {
                                 <Nav.Link className='seccion navText' href='/Admin'>Admin</Nav.Link>
                             )}
                             {firebaseUser == null && (
-                                <Nav.Link className='seccion navText' href='/LogIn'>Log In</Nav.Link>
+                                <Nav.Link className='seccion navText' href='/SignIn'>Log In</Nav.Link>
                             )}
                             {firebaseUser !== null && (
                                 <button className="btn btn-cerrar-sesion text-start" onClick={() => cerrarSesion()}>
