@@ -1,13 +1,18 @@
 import { Fragment, useState, useEffect } from "react";
-import { db } from "../firebase"; // Import Firebase configuration
+import { db } from "../firebase";
 
 const Reservas = ({ user }) => {
+    // Definir estados para la lista de reservas y errores
     const [listaReservas, setListaReservas] = useState([]);
     const [error, setError] = useState(null);
 
+    /**
+     * useEffect para obtener las reservas del usuario desde Firebase
+     */
     useEffect(() => {
         const obtenerReservas = async () => {
             try {
+                // Obtener reservas donde "apartadoPor" es igual al email del usuario
                 const data = await db.collection("salas").where("apartadoPor", "==", user.email).get();
                 const arrayData = data.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
                 setListaReservas(arrayData);
@@ -17,25 +22,28 @@ const Reservas = ({ user }) => {
             }
         };
 
+        // Obtener reservas solo si el usuario está definido y tiene un email
         if (user && user.email) {
             obtenerReservas();
         }
-    }, [user]); // Depend on user to refetch when user changes
+    }, [user]);
 
+    /**
+     * Función para liberar una sala apartada
+     * @param {string} salaId - ID de la sala
+     */
     const handleLiberar = async (salaId) => {
         try {
             const salaRef = db.collection("salas").doc(salaId);
 
-            // Update availability and clear "apartadoPor" field
+            // Actualizar la disponibilidad de la sala en Firebase
             await salaRef.update({
                 disponibilidad: true,
                 apartadoPor: "",
             });
 
-            // Fetch the updated document to ensure the local state is consistent with Firestore
+            // Actualizar la lista de reservas en el estado local
             const updatedReservas = listaReservas.filter((sala) => sala.id !== salaId);
-
-            // Update local state for immediate UI update
             setListaReservas(updatedReservas);
         } catch (error) {
             console.error(error);
@@ -44,7 +52,7 @@ const Reservas = ({ user }) => {
     };
 
     if (error) {
-        return <div>Error fetching reservations: {error}</div>;
+        return <div>Error al obtener las reservas: {error}</div>;
     }
 
     const isSingleCard = listaReservas.length === 1;
@@ -69,7 +77,7 @@ const Reservas = ({ user }) => {
                                         </div>
                                         <p className="card-text">{sala.descripcion}</p>
                                         <h6 className="card-subtitle mb-2 text-body-secondary">
-                                            Ubicacion: {sala.ubicacion}
+                                            Ubicación: {sala.ubicacion}
                                         </h6>
                                         <h6 className="card-subtitle mb-2 text-body-secondary">
                                             Capacidad: {sala.capacidad}
@@ -77,7 +85,7 @@ const Reservas = ({ user }) => {
                                         <button
                                             className="btn btn-primary col-4"
                                             onClick={() => handleLiberar(sala.id)}
-                                            disabled={!user || !user.email} // Disable button if user is not defined
+                                            disabled={!user || !user.email}
                                         >
                                             Liberar
                                         </button>

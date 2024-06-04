@@ -1,85 +1,112 @@
-import { Fragment } from "react"
-import React from "react"
-import { useNavigate } from 'react-router-dom'
-import { auth, db } from "../firebase"; 
+import { Fragment } from "react";
+import React from "react";
+import { useNavigate } from 'react-router-dom';
+import { auth, db } from "../firebase";
 import { Link } from "react-router-dom";
 
-
 const SignIn = () => {
+    // Definir estados para email, contraseña y errores
+    const [email, setEmail] = React.useState('');
+    const [pass, setPass] = React.useState('');
+    const [error, setError] = React.useState(null);
+    const navigate = useNavigate();
 
-    const [email, setEmail] = React.useState('')
-    const [pass, setPass] = React.useState('')
-    const [error, setError] = React.useState(null)
-    const navigate = useNavigate()
-
+    /**
+     * Función para guardar los datos del formulario y realizar las validaciones necesarias
+     * @param {Event} e - Evento del formulario que se dispara al intentar enviar el formulario
+     */
     const guardarDatos = async (e) => {
-        e.preventDefault()
-        if (!email) return setError("Ingrese su Email")
-        if (!pass) return setError("Ingrese su Password")
-        if (pass.length < 6) return setError("Password mínimo de 6 caracteres")
+        e.preventDefault(); // Evita que el formulario se envíe y la página se recargue
 
-        setError(null)
+        // Reiniciar el estado de error antes de validar
+        setError(null);
+
+        // Validaciones de entrada
+        if (!email) { 
+            setError("Ingrese su correo electrónico");
+            return; 
+        }
+        if (!pass) { 
+            setError("Ingrese su contraseña");
+            return; 
+        }
+        if (pass.length < 6) { 
+            setError("La contraseña debe tener al menos 6 caracteres");
+            return; 
+        }
 
         try {
+            // Autenticar al usuario con email y contraseña en Firebase
             const res = await auth.signInWithEmailAndPassword(email, pass);
             console.log(res.user);
             setEmail("");
             setPass("");
 
-            // Fetch user role from Firestore
+            // Obtener el documento del usuario desde Firestore
             const userDoc = await db.collection("usuarios").doc(res.user.email).get();
             if (userDoc.exists) {
                 const userData = userDoc.data();
                 const userRole = userData.role;
 
-                // Redirect based on user role
-                navigate(userRole === "admin" ? "/Admin" : "/"); // Home for non-admins
+                // Navegar a la página correspondiente según el rol del usuario
+                navigate(userRole === "admin" ? "/Admin" : "/");
             } else {
-                console.error("User document not found");
-                setError("Error al iniciar sesión"); // Handle missing user document
+                console.error("Documento de usuario no encontrado");
+                setError("Error al iniciar sesión");
             }
         } catch (error) {
             console.error(error);
+            // Manejo de errores específicos de Firebase
             if (error.code === "auth/invalid-email") {
-                setError("Email no Válido");
-            } else if (error.code === "auth/user-not-found") {
-                setError("Email no Registrado");
-            } else if (error.code === "auth/wrong-password") {
-                setError("Password no coincide");
+                setError("Email no válido");
+            } else if (error.code === "auth/internal-error") {
+                setError("Correo o contraseña incorrectos.");
             } else {
-                setError("Error al iniciar sesión"); // Handle generic errors
+                setError("Error al iniciar sesión");
             }
         }
-        }
-
+    };
 
     return (
         <Fragment>
             <main className="login">
-                {
-                    error && (<div className='alert alert-danger mt-2 col-4'>{error}</div>)
-                }
+                {/* Muestra el mensaje de error si existe */}
+                {error && (<div className='alert alert-danger mt-2 col-4'>{error}</div>)}
                 <div className="container-login justify-content-center bg bg-light p-5 rounded-5 shadow-lg">
                     <form onSubmit={guardarDatos} className="form-login">
                         <h2 className="text-center mb-4">Iniciar Sesión</h2>
+                        
                         <div className="mb-2 col-10 mx-auto">
-                            <label className="">Email</label>
-                            <input type="text" className="form-control" onChange={e => setEmail(e.target.value)} />
+                            <label>Correo electrónico</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                            />
                         </div>
+                        
                         <div className="mb-2 col-10 mx-auto">
-                            <label className="">Contraseña</label>
-                            <input type="password" className="form-control" onChange={e => setPass(e.target.value)} />
+                            <label>Contraseña</label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                value={pass}
+                                onChange={e => setPass(e.target.value)}
+                            />
                             <Link to="/LogIn" className='link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover'>
-                                ¿Aun no tienes cuenta?</Link>
+                                ¿Aún no tienes cuenta?
+                            </Link>
                         </div>
+                        
                         <div className="d-flex justify-content-center mb-2">
-                            <button className="btn btn-danger mx-4 " type="button" onClick={guardarDatos}>Registrar</button>
+                            <button className="btn btn-primary mx-4" type="submit">Ingresar</button>
                         </div>
                     </form>
                 </div>
             </main>
         </Fragment>
-    )
+    );
 }
 
-export default SignIn
+export default SignIn;

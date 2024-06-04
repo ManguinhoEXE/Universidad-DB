@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-
-
+/* Main */
 main {
     background: url(./assets/background.webp) no-repeat center/cover;
     display: flex;
@@ -12,17 +11,10 @@ main {
     width: 100%;
 }
 
-.card-container {
-    margin-inline: 10%;
-    padding-bottom: 5vh;
-}
-
 /* NavB */
-
 .navbar-gradient {
     background: linear-gradient(to bottom, #fff64e, #fbe628, #ff9900);
 }
-
 
 .navText, .btn-cerrar-sesion{
     font-size: 20px !important;
@@ -61,6 +53,7 @@ main {
     text-decoration: none;
 }
 
+/* Sección Hero */
 .hero-div {
     margin-top: 5vh;
     padding-inline: 2%;
@@ -86,6 +79,8 @@ main {
     word-wrap: break-word;
 }
 
+
+/* Contenedor de Contenidos */
 .content-container {
     display: flex;
     justify-content: space-around;
@@ -95,22 +90,29 @@ main {
 
 /* Info-section */
 .info-section {
-    width: 45%;
+    width: 35vw;
+    height: 52vh;
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
     max-height: 52vh;
     border-radius: 10px;
     box-shadow: 20px 5px 20px #00000033;
+    overflow-y: auto;
 }
 
-.info-section h2 {
+.card-container {
+    margin-inline: 10%;
+    padding-bottom: 5vh;
+}
+
+.info-section Card.Title {
     font-family: 'PT Sans', sans-serif;
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 10px;
 }
 
-.info-section p {
+.info-section Card.Text {
     font-family: 'PT Sans', sans-serif;
     font-size: 1rem;
     color: #333;
@@ -213,15 +215,11 @@ main {
     border-width: 3px;
 }
 
+
+/* Estilos Responsivos */
 @media (max-width:1357px) {
     html {
         font-size: 14px
-    }
-}
-
-@media (max-width:1040px) {
-    html {
-        font-size: 11px;
     }
 }
 
@@ -244,6 +242,7 @@ main {
 
     .info-section,
     .carousel-section {
+        margin-block: 1rem;
         width: 100%;
     }
     
